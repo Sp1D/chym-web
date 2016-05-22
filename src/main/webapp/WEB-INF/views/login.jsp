@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page contentType="text/html" pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
+<%@ page contentType="text/html" pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -24,7 +24,7 @@
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                     <button type="submit" class="btn btn-success btn-login">Login</button>
                 </form>
-                <p style="padding-top: 5px;">Not registered?&nbsp;<a href="<c:url value="/register"/>">So sign up!</a></p>
+                <p style="padding-top: 5px;">Not registered?&nbsp;<a href="<c:url value="/register"/>">Sign up!</a></p>
                 <p class="form-error"><c:out value="${error}"/></p>
             </div>
         </div>

@@ -40,7 +40,7 @@ public class UserValidator implements Validator {
     public void validate(Object o, Errors errors) {
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "username", "required", "Username is required");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "required", "Email is required");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "plainPassword", "required", "Password is required");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "p1", "required", "Password is required");
 
         int usernameMin = env.getProperty("user.username.minsize", Integer.class, DEFAULT_USERNAME_MIN);
         int usernameMax = env.getProperty("user.username.maxsize", Integer.class, DEFAULT_USERNAME_MAX);

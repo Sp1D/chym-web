@@ -12,7 +12,8 @@
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <spring.version>4.1.9.RELEASE</spring.version>        
+        <spring.version>4.2.5.RELEASE</spring.version>        
+        <spring.security.version>4.1.0.RELEASE</spring.security.version>        
         <log4j2.version>2.5</log4j2.version>
         <hibernate.version>5.1.0.Final</hibernate.version>
         <!--<hibernate.version>4.3.11.Final</hibernate.version>-->
@@ -26,13 +27,13 @@
             <type>jar</type>
         </dependency>
         
-        <dependency>
+<!--        <dependency>
             <groupId>com.omertron</groupId>
             <artifactId>themoviedbapi</artifactId>
             <version>4.2</version>
-        </dependency>
+        </dependency>-->
         
-        <dependency>
+<!--        <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
             <version>7.0</version>
@@ -43,16 +44,18 @@
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
             <version>2.6.4</version>
-        </dependency>
+        </dependency>-->
 
-        
-        <!--SPRING-->
         
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
             <version>${spring.version}</version>            
-        </dependency>
+        </dependency><dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>${spring.security.version}</version>
+        </dependency><!--SPRING-->
         
 <!--        <dependency>
             <groupId>org.springframework</groupId>
@@ -60,16 +63,14 @@
             <version>${spring.version}</version>            
         </dependency>-->
                         
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-web</artifactId>
-            <version>4.0.4.RELEASE</version>
-        </dependency>
+        
+        
+        
         
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-config</artifactId>
-            <version>4.0.4.RELEASE</version>
+            <version>${spring.security.version}</version>
         </dependency>                        
         
         <!--DATABASE-->
@@ -89,7 +90,7 @@
                 
         <!--LOGGING-->
     
-        <dependency>
+<!--        <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-api</artifactId>
             <version>${log4j2.version}</version>            
@@ -112,11 +113,19 @@
             <artifactId>log4j-jcl</artifactId>
             <version>${log4j2.version}</version>            
         </dependency>
-        
+        +
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-jul</artifactId>
             <version>${log4j2.version}</version>            
+        </dependency>-->
+        
+        <!--WEB-->
+        
+        <dependency>
+            <groupId>jstl</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
         </dependency>
         
         <!--TEST-->
@@ -135,23 +144,31 @@
             <scope>test</scope>
             <type>jar</type>
         </dependency>-->
+        
+        
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.16</version>
+        </dependency>
+        
     </dependencies>
 
     <build>
         <plugins>
-            <plugin>
+<!--            <plugin>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
                 <version>9.3.6.v20151106</version>
                 <configuration>		
                     <webApp>		                      
-                        <!--<contextPath>/dvd</contextPath>-->
+                        <contextPath>/chym</contextPath>
                     </webApp>	 
-<!--                    <httpConnector>
+                    <httpConnector>
                         <port>8080</port>
-                    </httpConnector>-->
+                    </httpConnector>
                 </configuration>
-            </plugin>
+            </plugin>-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>

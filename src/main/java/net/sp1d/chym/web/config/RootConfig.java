@@ -32,7 +32,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @PropertySource(value = {"classpath:application.properties"})
 @EnableJpaRepositories("net.sp1d.chym.loader.repo")
 @EnableTransactionManagement
-@ComponentScan(basePackages = {"net.sp1d.chym.web", "net.sp1d.chym.loader.service", "net.sp1d.chym.loader.tracker"})
+@ComponentScan(basePackages = {"net.sp1d.chym.web", "net.sp1d.chym.loader.tracker"})
 public class RootConfig {
 
     @Autowired
@@ -55,10 +55,10 @@ public class RootConfig {
     LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
         HibernateJpaVendorAdapter va = new HibernateJpaVendorAdapter();
-        va.setDatabase(Database.HSQL);
-        va.setDatabasePlatform("org.hibernate.dialect.HSQLDialect");
+        va.setDatabase(Database.MYSQL);
+        va.setDatabasePlatform("org.hibernate.dialect.MySQL5InnoDBDialect");
         va.setGenerateDdl(false);
-        va.setShowSql(false);
+        va.setShowSql(true);
         emf.setJpaVendorAdapter(va);
 
         emf.setDataSource(dataSource());

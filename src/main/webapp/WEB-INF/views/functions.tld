@@ -5,9 +5,8 @@
   <uri>/tlds/functions</uri>
   <function>
       <name>colcontains</name>
-      <function-class>com.sp1d.dvdshare.ContainsFunctionJSP</function-class>
-      <function-signature>java.lang.Boolean collectionContains(java.util.Collection, java.lang.Object)</function-signature>
-          
+      <function-class>net.sp1d.chym.web.util.ContainsFunctionJSP</function-class>
+      <function-signature>java.lang.Boolean collectionContains(java.util.Collection, java.lang.Object)</function-signature>          
   </function>
  
 </taglib>

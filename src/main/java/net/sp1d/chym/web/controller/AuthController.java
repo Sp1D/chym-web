@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import net.sp1d.chym.loader.bean.User;
 import net.sp1d.chym.loader.service.UserService;
+import net.sp1d.chym.web.service.WebUserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,11 +32,11 @@ public class AuthController {
     UserValidator userValidator;
 
     @Autowired
-    UserService userService;
+    WebUserService userService;
 
     private static final Logger LOG = LogManager.getLogger(AuthController.class);
 
-    @RequestMapping(path = "/login", method = RequestMethod.GET)
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
     String showLoginPage(@RequestParam(value = "error", required = false) String error, Model model) {
         LOG.debug("entering controller at GET /login");
         if (error != null) {
@@ -53,7 +54,7 @@ public class AuthController {
         return "redirect:/login";
     }
 
-    @RequestMapping(path = "/register", method = RequestMethod.GET)
+    @RequestMapping(value = "/register", method = RequestMethod.GET)
     String showRegisterPage(Model model) {
         LOG.debug("entering controller at GET /register");
         model.addAttribute("user", new User());
@@ -63,7 +64,7 @@ public class AuthController {
 /*
  *  Регистрация пользователя. Учетная запись, прошедшая валидацию, сохраняется в БД
  */
-    @RequestMapping(path = "/register", method = RequestMethod.POST)
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
     String register(User user, BindingResult result) {
         LOG.debug("entering controller at POST /register");
         userValidator.validate(user, result);

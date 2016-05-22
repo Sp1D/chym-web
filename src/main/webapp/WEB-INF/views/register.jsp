@@ -9,12 +9,12 @@
         <link rel="shortcut icon" href="<c:url value='static/img/favicon.png'/>">
         <link rel="stylesheet" href="<c:url value='static/css/bootstrap.min.css'/>">        
         <link rel="stylesheet" href="<c:url value='static/css/dvdshare.css'/>">        
-        <title>Register - dvdshare</title>
+        <title>Register - CHYM</title>
     </head>
     <body onload='document.form.email.focus();'>
         <div class="container">
             <div class="login">
-                <h2>Show us yourself</h2>
+                <h2>Who are you ?</h2>
                 <sf:form modelAttribute="user" name="form">                    
                     <div class="form-group">                
                         <sf:input class="form-control" type="email" placeholder="email" path="email"/>                        
@@ -23,11 +23,11 @@
                         <sf:input class="form-control" type="text" placeholder="username" path="username"/>
                     </div>
                     <div class="form-group">                
-                        <sf:input class="form-control" type="password" placeholder="password" path="plainPassword"/>
+                        <sf:input class="form-control" type="password" placeholder="password" path="p1"/>
                     </div>
                     <div class="form-group">                
-                        <sf:input class="form-control" type="password" placeholder="re-enter password" path="plainPasswordCheck"/>
-                    </div>                    
+                        <sf:input class="form-control" type="password" placeholder="re-enter password" path="p2"/>
+                    </div>                                
                     <button class="btn btn-success btn-login" type="submit">Register</button>                
                     <p style="padding-top: 5px;"><a href="<c:url value="/login"/>">Back to login page</a></p>
                     <sf:errors path="*" cssClass="form-error"/>

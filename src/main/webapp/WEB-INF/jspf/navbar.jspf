@@ -1,0 +1,138 @@
+<%-- any content can be specified here e.g.: --%>
+<%@ page pageEncoding="UTF-8" %>
+        <nav class="navbar navbar-fixed-top navbar-default">
+            <div class="container-fluid">
+                
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/">CHYM</a>
+                </div>                
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">                            
+                        <li>                            
+                            <a href="#" data-toggle="modal" data-target="#displayModal"><fmt:message key="navbar.settings"/></a>                                
+                        </li>
+
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <c:if test="${user == null}">
+                            <li><a href="<c:url value="/signup"/>"><fmt:message key="navbar.signup"/></a></li>
+                            <li><a href="<c:url value="/login"/>"><fmt:message key="navbar.login"/></a></li>                            
+                            </c:if>
+                            <c:if test="${user != null}">                            
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span><c:out value="${' '.concat(user.username.concat(' '))}"/><span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#"><fmt:message key="navbar.editProfile"/></a></li>                                    
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="<c:url value="/logout"/>"><fmt:message key="navbar.logout"/></a></li>
+                                </ul>
+                            </li>
+                        </c:if>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!--SETTINGS WINDOW-->
+
+        <div class="modal fade" id="displayModal" tabindex="-1" role="dialog" aria-labelledby="displayModal" aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="displayModal"><fmt:message key="navbar.settings"/></h4>
+                    </div>
+                    <div class="modal-body">
+                        <form id="settings"> 
+                            <div class="form-group">
+                                <label for="sort"><fmt:message key="settings.sortorder"/></label>
+                                <select class="form-control" name="sort" id="sort">     
+                                    <c:forTokens var="option" delims="," items="${sortValues}">
+                                        <c:if test="${sortOrder eq option}">
+                                            <option selected="selected"><c:out value="${option}"/></option>
+                                        </c:if>
+                                        <c:if test="${sortOrder ne option}">
+                                            <option><c:out value="${option}"/></option>
+                                        </c:if>
+                                    </c:forTokens>
+                                </select>
+                            </div>
+                            <!--                            <div class="checkbox">
+                                                            <label>
+                                                                <input type="checkbox" name="direction"  value="ascending">
+                                                                Sort in ascending order
+                                                            </label>
+                                                        </div>-->
+                            <div class="form-group">
+                                <label for="size"><fmt:message key="settings.seriesOnPage"/></label>
+                                <select class="form-control" name="s" id="size" title="Movies count on page">                                        
+                                    <c:forEach begin="24" end="48" step="6" var="option">
+                                        <c:if test="${pageSize == option}">
+                                            <option selected="selected"><c:out value="${option}"/></option>
+                                        </c:if>
+                                        <c:if test="${pageSize != option}">
+                                            <option><c:out value="${option}"/></option>
+                                        </c:if>
+                                    </c:forEach>
+                                </select>
+                            </div>
+                            <label><fmt:message key="settings.favoritesFirst"/></label>
+                            <c:if test="${user != null}">
+                                <c:if test="${favoritesFirst == true}">
+                                    <div class="radio">                                        
+                                        <label>                                            
+                                            <input type="radio" name="favorites" id="optionsRadios1" value="yes" checked>
+                                            <fmt:message key="settings.yes"/>
+                                        </label>
+                                    </div>
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="favorites" id="optionsRadios2" value="no">
+                                            <fmt:message key="settings.no"/>
+                                        </label>
+                                    </div>
+                                </c:if>
+                                <c:if test="${favoritesFirst == false}">
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="favorites" id="optionsRadios1" value="yes">
+                                            <fmt:message key="settings.yes"/>
+                                        </label>
+                                    </div>
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="favorites" id="optionsRadios2" value="no" checked>
+                                            <fmt:message key="settings.no"/>
+                                        </label>
+                                    </div>
+                                </c:if>
+                            </c:if>
+                            <c:if test="${user == null}">
+                                <div class="radio disabled">
+                                    <label>                                        
+                                        <input type="radio" name="favorites" id="optionsRadios1" value="yes" checked disabled>
+                                        <fmt:message key="settings.yes"/>
+                                    </label>
+                                </div>
+                                <div class="radio disabled">
+                                    <label>
+                                        <input type="radio" name="favorites" id="optionsRadios2" value="no" disabled>
+                                        <fmt:message key="settings.no"/>
+                                    </label>
+                                </div>
+                            </c:if>
+                        </form>                            
+                    </div>
+                    <div class="modal-footer" style="clear:both;">
+                        <button type="submit" class="btn btn-success" form="settings"><fmt:message key="settings.apply"/></button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal"><fmt:message key="settings.close"/></button>
+                    </div>
+                </div>
+            </div>
+        </div>
