@@ -10,12 +10,14 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
+import net.sp1d.chym.loader.bean.Episode;
 import net.sp1d.chym.loader.bean.Series;
 import net.sp1d.chym.loader.bean.SortDirection;
 
 import net.sp1d.chym.loader.bean.SortOrder;
 import net.sp1d.chym.loader.bean.User;
 import net.sp1d.chym.loader.service.UserService;
+import net.sp1d.chym.web.service.WebEpisodeService;
 import net.sp1d.chym.web.service.WebSeriesService;
 import net.sp1d.chym.web.service.WebUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +45,9 @@ public class MainController {
     
     @Autowired
     WebSeriesService seriesService;
+    
+    @Autowired
+    WebEpisodeService episodeService;
     
     @Autowired
     Environment env;
@@ -109,12 +114,13 @@ public class MainController {
         Series series = seriesService.findById(id);        
 //        Инициализация коллекций
         series.getForeignDescription().size();
-        series.getEpisodes().size();
-        
+//        series.getEpisodes().size();
+
         User user = userService.getPrincipal();
         
         model.addAttribute("series", series);
         model.addAttribute("user", user);
+        model.addAttribute("episodes", episodeService.getEpisodesMapBySeriesOrderByEpisodeNDesc(series));
         return "episodes";
     }
     
